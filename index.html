@@ -1,0 +1,500 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Magna Money | Debt Schedule</title>
+
+  <!-- Typography to match your existing forms -->
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --charcoal:#1C1C1C;
+      --panelA:rgba(29,30,32,0.95);
+      --panelB:rgba(29,30,32,0.90);
+      --border:rgba(255,255,255,0.06);
+      --white:#FFF;
+      --gold:#C6A76B;
+      --gold-shadow:rgba(198,167,107,0.3);
+      --dim:rgba(255,255,255,0.82);
+      --faint:rgba(255,255,255,0.68);
+      --radius:12px;
+      --pad:22px;
+      --max:1100px;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;background:var(--charcoal);color:var(--white);
+      font-family:"Lato",system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial;
+      padding:24px;display:flex;justify-content:center
+    }
+    .container{max-width:var(--max);width:100%;margin:0 auto}
+
+    /* Header */
+    .header-block{text-align:center;margin-bottom:14px}
+    .logo-wrap{display:inline-flex;flex-direction:column;align-items:center;justify-content:center;margin-bottom:12px}
+    .crown-logo{
+      width:72px;height:72px;background-size:contain;background-repeat:no-repeat;background-position:center;
+      background-image:url("https://magna-money-enquiry-form.neocities.org/Magna%20Money%20logo_full_colour.png");
+      filter:drop-shadow(0 4px 12px var(--gold-shadow));
+    }
+    .brand-name{color:var(--white);font-weight:700;font-size:18px;letter-spacing:.05em;margin-top:12px;text-transform:uppercase}
+    .brand-tag{color:var(--gold);font-size:13px;margin-top:6px;text-align:center;max-width:700px}
+    .doc-title{font-weight:700;font-size:20px;margin:16px 0 2px;color:var(--white)}
+    .website-line{color:var(--gold);font-weight:600;margin-top:6px;font-size:14px}
+    .intro{color:var(--white);opacity:.95;font-weight:300;margin:12px auto 18px;line-height:1.4;max-width:920px;text-align:center}
+
+    /* Panel / Form */
+    .form-panel{
+      background:linear-gradient(180deg,var(--panelA),var(--panelB));
+      border-radius:var(--radius);padding:var(--pad);
+      box-shadow:0 8px 30px rgba(0,0,0,.5);
+      border:1px solid var(--border)
+    }
+    h3.section{margin:12px 0 12px;font-size:16px;color:var(--white);font-weight:700}
+    .subtext{font-size:13px;color:var(--faint);margin-top:6px}
+    .row{display:flex;gap:16px;flex-wrap:wrap}
+    .col{flex:1 1 280px;min-width:220px}
+    label{display:block;font-weight:400;margin-bottom:8px}
+    input[type="text"],input[type="email"],input[type="tel"],input[type="number"],textarea,select{
+      width:100%;padding:10px 12px;border-radius:6px;border:1px solid rgba(198,167,107,0.18);
+      background:rgba(255,255,255,0.02);color:var(--white);font-size:15px;outline:none
+    }
+    input[type="number"]{-moz-appearance:textfield}
+    input[type="number"]::-webkit-outer-spin-button,input[type="number"]::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
+    textarea{min-height:110px;resize:vertical}
+    .field{margin-bottom:14px}
+    .btn{
+      background:var(--gold);color:var(--white);border:none;padding:12px 32px;border-radius:8px;
+      font-weight:700;cursor:pointer;box-shadow:0 8px 22px rgba(198,167,107,0.12);font-size:16px
+    }
+    input:focus,textarea:focus,select:focus{box-shadow:0 0 0 3px rgba(198,167,107,.10);border-color:var(--gold)}
+    .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+    .grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px}
+    .grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+    hr.div{border:none;border-top:1px solid rgba(255,255,255,.06);margin:14px 0}
+    .summary{display:flex;gap:10px;flex-wrap:wrap;margin-top:8px}
+    .pill{padding:6px 10px;border:1px solid rgba(255,255,255,.08);border-radius:999px;background:rgba(255,255,255,.02);font-size:14px;color:var(--dim)}
+    .disclaimer,.gdpr{font-size:13px;color:var(--dim);background:rgba(255,255,255,0.02);padding:12px;border-radius:6px;margin-top:8px}
+    .submit-row{display:flex;justify-content:center;margin-top:12px}
+    .right{text-align:right}
+    .line{display:grid;grid-template-columns: 2fr 1fr;gap:12px;align-items:center;}
+    .line label{margin:0}
+    .section-help{font-size:13px;color:var(--faint);margin:-2px 0 10px}
+
+    .debt-row{
+      border:1px solid rgba(255,255,255,.08);
+      border-radius:8px;
+      padding:12px;
+      background:rgba(255,255,255,.02);
+      margin-bottom:12px
+    }
+    .debt-row .row-title{font-weight:700;color:var(--white);margin:2px 0 10px}
+    .debt-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:6px}
+    .btn-secondary{
+      background:transparent;border:1px solid rgba(255,255,255,.22);color:var(--white);
+      padding:8px 16px;border-radius:8px;font-weight:600;cursor:pointer
+    }
+    .btn-danger{
+      background:transparent;border:1px solid rgba(255,90,90,.45);color:#ff9090;
+      padding:8px 16px;border-radius:8px;font-weight:700;cursor:pointer
+    }
+    @media (max-width:900px){.grid-4{grid-template-columns:1fr 1fr}}
+  </style>
+</head>
+<body>
+<div class="container" role="main">
+  <!-- Header -->
+  <div class="header-block">
+    <div class="logo-wrap">
+      <div class="crown-logo" aria-hidden="true"></div>
+      <div class="brand-name">MAGNAMONEY</div>
+      <div class="brand-tag">The Commercial Finance Boutique – Bespoke, Collaborative &amp; Expert Funding Advisory</div>
+    </div>
+    <div class="doc-title">Debt Schedule</div>
+    <div class="website-line">www.magnamoney.co.uk</div>
+    <div class="intro">Please list all existing business facilities and commitments. Add rows as needed; totals update automatically.</div>
+  </div>
+
+  <div class="form-panel">
+    <form
+      id="debt-form"
+      class="debt-form"
+      name="#Debt Schedule"
+      method="POST"
+      action="#"
+      novalidate
+      autocomplete="on"
+    >
+      <!-- Hidden totals for webhook/HubSpot (read-only values populated by JS) -->
+      <div style="display:none;">
+        <label>Total Outstanding Amount (£)</label>
+        <input id="total_outstanding" name="Debt Schedule - Total Outstanding (£)" type="number" readonly>
+        <label>Total Monthly Payment (£)</label>
+        <input id="total_monthly_payment" name="Debt Schedule - Total Monthly Payment (£)" type="number" readonly>
+        <label>Total Number of Debts</label>
+        <input id="debt_count" name="Debt Schedule - Debt Count" type="number" readonly>
+      </div>
+
+      <!-- Section: Borrower (header fields) -->
+      <h3 class="section">Borrower Details</h3>
+      <div class="row">
+        <div class="col field">
+          <label for="company">Company Name</label>
+          <input id="Company" name="Company Name" type="text" placeholder="e.g. Magna Money Ltd" required>
+        </div>
+        <div class="col field">
+          <label for="contactEmail">Email Address</label>
+          <input id="contactEmail" name="email" type="email" placeholder="client@company.com" autocomplete="email" required>
+        </div>
+      </div>
+
+      <hr class="div">
+
+      <!-- Section: Debt Items -->
+      <h3 class="section">Facilities / Debts</h3>
+      <div class="section-help">Add each facility below. Use the “Add another facility” button to insert more rows.</div>
+
+      <div id="debts-wrap"></div>
+
+      <div class="debt-actions">
+        <button id="add-debt" class="btn-secondary" type="button">+ Add another facility</button>
+      </div>
+
+      <div class="summary" id="totals-summary" style="margin-top:12px;">
+        <span class="pill">Total Outstanding: <strong id="sumOutstanding">£0.00</strong></span>
+        <span class="pill">Total Monthly Payments: <strong id="sumMonthly">£0.00</strong></span>
+        <span class="pill">Facility Count: <strong id="sumCount">0</strong></span>
+      </div>
+
+      <hr class="div">
+
+      <!-- Declaration -->
+      <h3 class="section">Declaration</h3>
+      <div class="disclaimer">
+        I / We confirm that the information given above is true and accurate to the best of my/our knowledge and belief.
+      </div>
+      <div class="grid-3">
+        <div class="field">
+          <label for="signedBy">Signed (name)</label>
+          <input id="signedBy" name="Signed By" type="text" placeholder="Full name">
+        </div>
+        <div class="field">
+          <label for="declarationDate">Date</label>
+          <input id="declarationDate" name="Declaration Date" type="text" placeholder="DD / MM / YYYY">
+        </div>
+        <div class="field">
+          <label for="notesGeneral">Notes (optional)</label>
+          <input id="notesGeneral" name="Notes - General" type="text" placeholder="Any additional info">
+        </div>
+      </div>
+
+      <!-- GDPR & Marketing (replicated from ALIE style) -->
+      <h3 class="section">Data Protection &amp; Consent</h3>
+      <div class="gdpr">
+        By submitting this form, you confirm that:<br><br>
+        • You consent to Magna Money collecting and processing your personal and business information for the purpose of assessing affordability and your finance requirements.<br>
+        • You acknowledge that Magna Money may carry out publicly accessible checks such as Companies House searches, business credit profile reviews, and director information validation where relevant.<br>
+        • You understand that separate consent may be requested where individual or business credit checks are required.<br>
+        • You understand that Magna Money processes your information under its legitimate business interest to arrange commercial finance, liaise with lenders, and maintain appropriate records.<br>
+        • You confirm that all information provided is accurate to the best of your knowledge and may be relied upon by prospective lenders.
+      </div>
+      <div class="gdpr">
+        <strong>Your Rights</strong><br>
+        You may request access, correction, deletion, restriction, objection, or transfer of your data at any time. For full details, please refer to Magna Money’s Privacy Notice on our website.
+      </div>
+      <div class="gdpr">
+        <strong>Regulatory Status</strong><br>
+        Magna Money is an independent commercial finance broker and not a lender. We are not authorised or regulated by the Financial Conduct Authority (FCA). All finance is subject to status and lender acceptance. Information provided on this form is for enquiry and assessment purposes only.
+      </div>
+      <div class="field" style="margin-top:10px;">
+        <label>
+          <input type="checkbox" name="marketing_opt_in" value="yes" style="width:auto; margin-right:8px;">
+          I would like to receive marketing communications from Magna Money. (You can unsubscribe at any time.)
+        </label>
+      </div>
+      <div class="gdpr" style="margin-top:10px;">
+        For full details, please see our
+        <a href="https://www.magnamoney.co.uk/privacy-policy" target="_blank" rel="noopener noreferrer" style="color:#C6A76B;">
+          Privacy Policy
+        </a>.
+        If you no longer wish to receive emails from us, you can update your communication preferences or
+        unsubscribe using the links included at the bottom of our emails.
+      </div>
+
+      <div class="submit-row">
+        <button class="btn" type="submit">Submit Debt Schedule</button>
+      </div>
+    </form>
+  </div> <!-- end .form-panel -->
+</div> <!-- end .container -->
+
+<!-- BEGIN Debt Schedule SCRIPT BLOCK -->
+<script>
+// ==========================
+// CONFIG — update these two
+// ==========================
+const WEBHOOK_URL   = 'https://YOUR-EXISTING-WEBHOOK.example.com/submit';  // Use the SAME endpoint you use for Enquiry / Proposal / ALIE
+const THANK_YOU_URL = 'https://magna-money-debt-schedule.vercel.app/thank-you-debt-schedule.html';
+
+// Currency formatting
+const fmtGBP = (n) => '£' + (Number(n||0).toFixed(2));
+
+// Build a debt row (index is 1-based for readable field names)
+function makeDebtRow(idx){
+  const row = document.createElement('div');
+  row.className = 'debt-row';
+  row.dataset.index = idx;
+
+  row.innerHTML = `
+    <div class="row-title">Facility ${idx}</div>
+    <div class="grid-3">
+      <div class="field">
+        <label for="debt_${idx}_lender">Lender name</label>
+        <input id="debt_${idx}_lender" name="Debt ${idx} - Lender Name" type="text" placeholder="Lender" required>
+      </div>
+      <div class="field">
+        <label for="debt_${idx}_facility_type">Facility type</label>
+        <input id="debt_${idx}_facility_type" name="Debt ${idx} - Facility Type" type="text" placeholder="e.g. Term Loan / Invoice Finance" required>
+      </div>
+      <div class="field">
+        <label for="debt_${idx}_rate_type">Rate type</label>
+        <select id="debt_${idx}_rate_type" name="Debt ${idx} - Rate Type">
+          <option value="">Please choose…</option>
+          <option>Fixed</option>
+          <option>Variable</option>
+          <option>Tracker</option>
+          <option>Other</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="grid-3">
+      <div class="field">
+        <label for="debt_${idx}_secured_against">Secured against (if secured)</label>
+        <input id="debt_${idx}_secured_against" name="Debt ${idx} - Secured Against" type="text" placeholder="Asset / None">
+      </div>
+      <div class="field">
+        <label for="debt_${idx}_asset_value">Asset value (£)</label>
+        <input id="debt_${idx}_asset_value" name="Debt ${idx} - Asset Value (£)" type="number" step="0.01" min="0" placeholder="0.00" class="right">
+      </div>
+      <div class="field">
+        <label for="debt_${idx}_interest_rate">Interest rate (%)</label>
+        <input id="debt_${idx}_interest_rate" name="Debt ${idx} - Interest Rate (%)" type="number" step="0.0001" min="0" placeholder="0.0000" class="right">
+      </div>
+    </div>
+
+    <div class="grid-4">
+      <div class="field">
+        <label for="debt_${idx}_start">Start date</label>
+        <input id="debt_${idx}_start" name="Debt ${idx} - Start Date" type="text" placeholder="DD / MM / YYYY">
+      </div>
+      <div class="field">
+        <label for="debt_${idx}_end">End date</label>
+        <input id="debt_${idx}_end" name="Debt ${idx} - End Date" type="text" placeholder="DD / MM / YYYY">
+      </div>
+      <div class="field">
+        <label for="debt_${idx}_term_months">Remaining term (months)</label>
+        <input id="debt_${idx}_term_months" name="Debt ${idx} - Remaining Term (Months)" type="number" step="1" min="0" placeholder="0" class="right">
+      </div>
+      <div class="field">
+        <label for="debt_${idx}_repayment_type">Repayment type</label>
+        <select id="debt_${idx}_repayment_type" name="Debt ${idx} - Repayment Type">
+          <option value="">Please choose…</option>
+          <option>Interest Only</option>
+          <option>Fully Amortised</option>
+          <option>Bullet</option>
+          <option>Other</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="grid-3">
+      <div class="field">
+        <label for="debt_${idx}_outstanding">Outstanding amount (£)</label>
+        <input id="debt_${idx}_outstanding" name="Debt ${idx} - Outstanding Amount (£)" type="number" step="0.01" min="0" placeholder="0.00" class="right">
+      </div>
+      <div class="field">
+        <label for="debt_${idx}_monthly_payment">Monthly payment (£)</label>
+        <input id="debt_${idx}_monthly_payment" name="Debt ${idx} - Monthly Payment (£)" type="number" step="0.01" min="0" placeholder="0.00" class="right">
+      </div>
+      <div class="field">
+        <label for="debt_${idx}_borrower_name">Borrower name (row)</label>
+        <input id="debt_${idx}_borrower_name" name="Debt ${idx} - Borrower Name" type="text" placeholder="Auto-copies main borrower">
+      </div>
+    </div>
+
+    <div class="field">
+      <label for="debt_${idx}_notes">Notes (e.g. bullet repayment, fully amortised etc)</label>
+      <input id="debt_${idx}_notes" name="Debt ${idx} - Notes" type="text" placeholder="Notes">
+    </div>
+
+    <div class="debt-actions">
+      <button type="button" class="btn-danger" data-remove="${idx}">Remove this facility</button>
+    </div>
+  `;
+  return row;
+}
+
+// Helpers
+const valNum = (el) => {
+  if (!el) return 0;
+  const x = parseFloat(String(el.value).replace(/,/g,''));
+  return isNaN(x) ? 0 : x;
+};
+
+// Recalculate totals
+function recalcTotals(){
+  const wrap = document.getElementById('debts-wrap');
+  const rows = wrap.querySelectorAll('.debt-row');
+  let totalOutstanding = 0;
+  let totalMonthly = 0;
+
+  rows.forEach(r => {
+    totalOutstanding += valNum(r.querySelector(`[id^="debt_${r.dataset.index}_outstanding"]`));
+    totalMonthly    += valNum(r.querySelector(`[id^="debt_${r.dataset.index}_monthly_payment"]`));
+  });
+
+  // Summary pills
+  document.getElementById('sumOutstanding').textContent = fmtGBP(totalOutstanding);
+  document.getElementById('sumMonthly').textContent = fmtGBP(totalMonthly);
+  document.getElementById('sumCount').textContent = String(rows.length);
+
+  // Hidden inputs (for webhook/HubSpot)
+  const hOutstanding = document.getElementById('total_outstanding');
+  const hMonthly     = document.getElementById('total_monthly_payment');
+  const hCount       = document.getElementById('debt_count');
+
+  if (hOutstanding) hOutstanding.value = totalOutstanding.toFixed(2);
+  if (hMonthly)     hMonthly.value     = totalMonthly.toFixed(2);
+  if (hCount)       hCount.value       = rows.length;
+}
+
+// Ensure row indices & names are contiguous after remove
+function renumberRows(){
+  const wrap = document.getElementById('debts-wrap');
+  const rows = Array.from(wrap.querySelectorAll('.debt-row'));
+  rows.forEach((row, i) => {
+    const newIdx = i + 1;
+    if (String(row.dataset.index) === String(newIdx)) return; // already fine
+    const oldIdx = row.dataset.index;
+    // Update dataset + title
+    row.dataset.index = newIdx;
+    row.querySelector('.row-title').textContent = `Facility ${newIdx}`;
+    // Update ids/names inside this row
+    row.querySelectorAll('[id]').forEach(el => {
+      el.id = el.id.replace(`debt_${oldIdx}_`, `debt_${newIdx}_`);
+    });
+    row.querySelectorAll('[name]').forEach(el => {
+      el.name = el.name.replace(`Debt ${oldIdx} -`, `Debt ${newIdx} -`);
+    });
+    // Update remove button
+    const removeBtn = row.querySelector('button.btn-danger[data-remove]');
+    if (removeBtn) removeBtn.dataset.remove = newIdx;
+  });
+}
+
+// Add initial one row
+function ensureAtLeastOneRow(){
+  const wrap = document.getElementById('debts-wrap');
+  if (!wrap.querySelector('.debt-row')){
+    wrap.appendChild(makeDebtRow(1));
+  }
+}
+
+// Copy main borrower name into each row’s “Borrower name (row)” for convenience
+function syncBorrowerIntoRows(){
+  const borrower = document.getElementById('borrowerName')?.value || '';
+  const wrap = document.getElementById('debts-wrap');
+  wrap.querySelectorAll('input[name*=" - Borrower Name"]').forEach(inp => {
+    if (!inp.value) inp.value = borrower;
+  });
+}
+
+// Init
+document.addEventListener('DOMContentLoaded', () => {
+  const wrap = document.getElementById('debts-wrap');
+  const addBtn = document.getElementById('add-debt');
+
+  ensureAtLeastOneRow();
+  recalcTotals();
+
+  // Add row
+  addBtn.addEventListener('click', () => {
+    const next = wrap.querySelectorAll('.debt-row').length + 1;
+    wrap.appendChild(makeDebtRow(next));
+    syncBorrowerIntoRows();
+    recalcTotals();
+  });
+
+  // Delegate: remove row
+  wrap.addEventListener('click', (e) => {
+    if (e.target && e.target.matches('.btn-danger[data-remove]')){
+      const idx = e.target.getAttribute('data-remove');
+      const row = wrap.querySelector(`.debt-row[data-index="${idx}"]`);
+      if (row) row.remove();
+      renumberRows();
+      recalcTotals();
+    }
+  });
+
+  // Recalc on input changes
+  document.addEventListener('input', (e) => {
+    if (e.target.matches('input[type="number"], input[type="text"], select')) {
+      if (e.target.id === 'borrowerName') syncBorrowerIntoRows();
+      recalcTotals();
+    }
+  });
+
+  // Submit handler: send JSON to your webhook, then redirect
+  const form = document.getElementById('debt-form');
+  if (form){
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      try {
+        recalcTotals(); // ensure hidden totals populated
+
+        // Build a flat object of fields (HubSpot-friendly names already set)
+        const fd = new FormData(form);
+        const payload = {};
+        fd.forEach((value, key) => {
+          // If multiple same keys, convert to array
+          if (payload[key] !== undefined) {
+            if (Array.isArray(payload[key])) payload[key].push(value);
+            else payload[key] = [payload[key], value];
+          } else {
+            payload[key] = value;
+          }
+        });
+
+        // Post to your existing middleware/webhook
+        await fetch(WEBHOOK_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload),
+          // You may need CORS enabled server-side as per your existing forms
+        });
+
+      } catch (err) {
+        // Swallow error to not block the UX; you can console.log if needed
+        console.error('Submission error:', err);
+      } finally {
+        // Redirect to static thank-you (mirrors your ALIE pattern)
+        setTimeout(() => {
+          window.location.href = THANK_YOU_URL;
+        }, 1000);
+      }
+    });
+  }
+});
+</script>
+<!-- END Debt Schedule SCRIPT BLOCK -->
+
+<!-- Start of HubSpot Embed Code (same portal as your other forms) -->
+<script type="text/javascript" id="hs-script-loader" async defer src="//js.hs-scripts.com/8402236.js"></script>
+<!-- End of HubSpot Embed Code -->
+
+</body>
+</html>
