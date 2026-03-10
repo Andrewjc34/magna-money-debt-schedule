@@ -155,7 +155,7 @@
 
       <!-- Section: Debt Items -->
       <h3 class="section">Facilities / Debts</h3>
-      <div class="section-help">Add each facility below. Use the “Add another facility” button to insert more rows.</div>
+      <div class="section-help">Add each facility below. Use the "Add another facility" button to insert more rows.</div>
 
       <div id="debts-wrap"></div>
 
@@ -196,18 +196,18 @@
       <div class="gdpr">
         By submitting this form, you confirm that:<br><br>
         • You consent to Magna Money collecting and processing your personal and business information for the purpose of assessing affordability and your finance requirements.<br>
-        • You acknowledge that Magna Money may carry out publicly accessible checks such as Companies House searches, business credit profile reviews, and director information validation where relevant.<br>
+        • You acknowledge that Magna Money may carry out publicly accessible checks such as Companies House searches, business credit profile reviews, and director information validation where relev[...]
         • You understand that separate consent may be requested where individual or business credit checks are required.<br>
         • You understand that Magna Money processes your information under its legitimate business interest to arrange commercial finance, liaise with lenders, and maintain appropriate records.<br>
         • You confirm that all information provided is accurate to the best of your knowledge and may be relied upon by prospective lenders.
       </div>
       <div class="gdpr">
         <strong>Your Rights</strong><br>
-        You may request access, correction, deletion, restriction, objection, or transfer of your data at any time. For full details, please refer to Magna Money’s Privacy Notice on our website.
+        You may request access, correction, deletion, restriction, objection, or transfer of your data at any time. For full details, please refer to Magna Money's Privacy Notice on our website.
       </div>
       <div class="gdpr">
         <strong>Regulatory Status</strong><br>
-        Magna Money is an independent commercial finance broker and not a lender. We are not authorised or regulated by the Financial Conduct Authority (FCA). All finance is subject to status and lender acceptance. Information provided on this form is for enquiry and assessment purposes only.
+        Magna Money is an independent commercial finance broker and not a lender. We are not authorised or regulated by the Financial Conduct Authority (FCA). All finance is subject to status and lend[...]
       </div>
       <div class="field" style="margin-top:10px;">
         <label>
@@ -321,13 +321,13 @@ function makeDebtRow(idx){
         <input id="debt_${idx}_monthly_payment" name="Debt ${idx} - Monthly Payment (£)" type="number" step="0.01" min="0" placeholder="0.00" class="right">
       </div>
       <div class="field">
-        <label for="debt_${idx}_borrower_name">Borrower name (row)</label>
-        <input id="debt_${idx}_borrower_name" name="Debt ${idx} - Borrower Name" type="text" placeholder="Auto-copies main borrower">
+        <label for="debt_${idx}_company_name">Company Name (row)</label>
+        <input id="debt_${idx}_company_name" name="Debt ${idx} - Company Name" type="text" placeholder="Auto-copies Company Name">
       </div>
     </div>
 
     <div class="field">
-      <label for="debt_${idx}_notes">Notes (e.g. bullet repayment, fully amortised etc)</label>
+      <label for="debt_${idx}_notes">Notes (missed payments, over payments, proposed early redemption timeframe etc)</label>
       <input id="debt_${idx}_notes" name="Debt ${idx} - Notes" type="text" placeholder="Notes">
     </div>
 
@@ -404,12 +404,12 @@ function ensureAtLeastOneRow(){
   }
 }
 
-// Copy main borrower name into each row’s “Borrower name (row)” for convenience
-function syncBorrowerIntoRows(){
-  const borrower = document.getElementById('borrowerName')?.value || '';
+// Copy main company name into each row's "Company Name (row)" for convenience
+function syncCompanyNameIntoRows(){
+  const companyName = document.getElementById('Company')?.value || '';
   const wrap = document.getElementById('debts-wrap');
-  wrap.querySelectorAll('input[name*=" - Borrower Name"]').forEach(inp => {
-    if (!inp.value) inp.value = borrower;
+  wrap.querySelectorAll('input[name*=" - Company Name"]').forEach(inp => {
+    if (!inp.value) inp.value = companyName;
   });
 }
 
@@ -425,7 +425,7 @@ document.addEventListener('DOMContentLoaded', () => {
   addBtn.addEventListener('click', () => {
     const next = wrap.querySelectorAll('.debt-row').length + 1;
     wrap.appendChild(makeDebtRow(next));
-    syncBorrowerIntoRows();
+    syncCompanyNameIntoRows();
     recalcTotals();
   });
 
@@ -443,7 +443,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // Recalc on input changes
   document.addEventListener('input', (e) => {
     if (e.target.matches('input[type="number"], input[type="text"], select')) {
-      if (e.target.id === 'borrowerName') syncBorrowerIntoRows();
+      if (e.target.id === 'Company') syncCompanyNameIntoRows();
       recalcTotals();
     }
   });
